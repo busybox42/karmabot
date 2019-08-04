@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: karma-app
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: karma-app
+    spec:
+      containers:
+      - env:
+        - name: TOKEN
+          value: <replace with legacy token>
+        - name: CHANNEL
+          value: <replace with channel id>
+        image: karmabot
+        imagePullPolicy: Never
+        name: karma-app
