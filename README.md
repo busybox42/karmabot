@@ -21,12 +21,11 @@ docker build -t karmabot .
 ```  
   
 ## Running with Kubernetes
-Because who doesn't want to scale their trolling?
-
 To run in kubernetes first manually build the image.
-After the image is built you can either run this command:
+
+After the image is built you can either run this command with your slack legacy token, channel id:
 ```bash
-kubectl run --image=karmabot karma-app --env="TOKEN=<Slack legacy token>" --env="CHANNEL=<channel id>" --image-pull-policy=Never --replicas=2
+kubectl run --image=karmabot karma-app --env="TOKEN=<Slack legacy token>" --env="CHANNEL=<channel id>" --image-pull-policy=Never --replicas=1
 ```
 or modify the karma-app.yaml file adding your legacy token and channel id:
 ```bash
@@ -34,6 +33,7 @@ kubectl apply -f karma-app.yaml
 ```
 
 ### Scaling in Kubernetes
+Because who doesn't want to scale their trolling?
 ```bash
 kubectl scale deployment karma-app --replicas=3 
 ```
