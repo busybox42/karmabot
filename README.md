@@ -1,4 +1,4 @@
-# karmabot
+# Karmabot
 Slack bot for trolling karma. 
 
 ## What? Why?
@@ -13,6 +13,7 @@ docker run -it --restart=always --name karmabot -d -e TOKEN=<Legacy Slack Token>
 ```
 
 ## Building Manually
+Build manually if you want to moify the karmabot.rb and/or if you want to run in kubernetes.
 ```bash
 git clone https://github.com/busybox42/karmabot.git 
 cd  karmabot
@@ -23,15 +24,11 @@ docker build -t karmabot .
 Because who doesn't want to scale their trolling?
 
 To run in kubernetes first manually build the image.
-
 After the image is built you can either run this command:
-
 ```bash
 kubectl run --image=karmabot karma-app --env="TOKEN=<Slack legacy token>" --env="CHANNEL=<channel id>" --image-pull-policy=Never --replicas=2
 ```
-
 or modify the karma-app.yaml file adding your legacy token and channel id:
-
 ```bash
 kubectl apply -f karma-app.yaml
 ```
