@@ -32,3 +32,8 @@ or modify the karma-app.yaml file adding your legacy token and channel id:
 ```bash
 kubectl apply -f karma-app.yaml
 ```
+
+### Scaling in Kubernetes
+```bash
+kubectl scale deployment karma-app --replicas=3 
+```
