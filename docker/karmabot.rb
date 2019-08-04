@@ -30,7 +30,7 @@ loop {
   end
   client.im_mark(channel: "$CHANNEL", ts: time)
   time = Time.now.to_i
-  sleep (rand(300..1800))
+  sleep (rand(300..1200))
 }
 EOF
 
