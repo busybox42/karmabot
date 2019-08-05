@@ -6,7 +6,7 @@ Slack bot for trolling karma.
 ## What? Why?
 In a slack channel I use there is a bot which has a karma module.  Messaging the bot with "fubar++" or "fubar--" will add or subtract the karma value for fubar. This was created as a troll response to a "war" of sorts between perl and ruby developers in slack.
 
-This docker image runs a ruby script to add positive karma to ruby and negitive karma to perl with a random sleep between 5 and 20 minutes. As to not just keep adding karma onces the war is won I had set a random limit on when to add karma. After initialization the script will add karma to ruby if it is less than a random number between 500 and 1000.  Likewise, it will subtract karma from perl if it is greater than a randomin number between -1000 and -500.
+This docker image runs a ruby script to add positive karma to ruby and negative karma to perl with a random sleep between 5 and 20 minutes. As to not just keep adding karma once the war is won I had set a random limit on when to add karma. After initialization the script will add karma to ruby if it is less than a random number between 500 and 1000.  Likewise, it will subtract karma from perl if it is greater than a random number between -1000 and -500.
 
 ## Running in Docker
 ```bash
@@ -15,7 +15,7 @@ docker run -it --restart=always --name karmabot -d -e TOKEN=<Legacy Slack Token>
 ```
 
 ## Building Manually
-Build manually if you want to moify the karmabot.rb and/or if you want to run in kubernetes.
+Build manually if you want to modify the karmabot.rb and/or if you want to run in kubernetes.
 ```bash
 git clone https://github.com/busybox42/karmabot.git 
 cd  karmabot
