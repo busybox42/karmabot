@@ -1,5 +1,5 @@
-[![](https://images.microbadger.com/badges/version/busybox42/karmabot.svg)](https://microbadger.com/images/busybox42/karmabot "Get your own version badge on microbadger.com")
 [![](https://images.microbadger.com/badges/image/busybox42/karmabot.svg)](https://microbadger.com/images/busybox42/karmabot "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/version/busybox42/karmabot.svg)](https://microbadger.com/images/busybox42/karmabot "Get your own version badge on microbadger.com")
 # Karmabot
 Slack bot for trolling karma. 
 
