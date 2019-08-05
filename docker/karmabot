@@ -8,14 +8,23 @@ cat <<EOF > /usr/src/app/karmabot.tmp
 require 'slack-ruby-client'
 require 'json'
 
+# Initialize time and karma values
 time = Time.now.to_i
+rk = 0
+pk = 0
 
 Slack.configure { |config| config.token = "$TOKEN" }
 client = Slack::Web::Client.new
 loop {
-  client.chat_postMessage(channel: "$CHANNEL", text: "ruby++", as_user: true);
-  client.chat_postMessage(channel: "$CHANNEL", text: "perl--", as_user: true);
+  # Only send Karma if values are above or below random values.
+  if rk < rand(500..1000)
+    client.chat_postMessage(channel: "$CHANNEL", text: "ruby++", as_user: true);
+  end
+  if pk > rand(-1000..-500)
+    client.chat_postMessage(channel: "$CHANNEL", text: "perl--", as_user: true);
+  end
   sleep 1
+  # Get messages and parse.
   a = client.conversations_history(channel: "$CHANNEL", inclusive: true, oldest: time).to_json;
   msg = JSON.parse(a)['messages'].reverse
   msg.each do |t|
@@ -27,6 +36,17 @@ loop {
       u = t['username']
     end
     puts "#{ts} #{u}: #{t['text']}"
+    # Try and get current karma value.
+    if u != "Me"
+      if "#{t['text']}".include? "ruby"
+        txt = "#{t['text']}".split(' ')
+        rk = txt[4]
+      end
+      if "#{t['text']}".include? "poo"
+          txt = "#{t['text']}".split(' ')
+          pk = txt[4]
+      end
+    end
   end
   client.im_mark(channel: "$CHANNEL", ts: time)
   time = Time.now.to_i

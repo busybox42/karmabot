@@ -7,4 +7,4 @@ RUN gem install slack-ruby-client
 
 COPY . .
 
-CMD ["./karmabot.rb"]
+CMD ["./karmabot"]
