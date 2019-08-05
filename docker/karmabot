@@ -17,11 +17,15 @@ Slack.configure { |config| config.token = "$TOKEN" }
 client = Slack::Web::Client.new
 loop {
   # Only send Karma if values are above or below random values.
-  if rk < rand(500..1000)
+  if rk.to_i < rand(500..1000)
     client.chat_postMessage(channel: "$CHANNEL", text: "ruby++", as_user: true);
+  else
+    client.chat_postMessage(channel: "$CHANNEL", text: "How much karma does ruby have?", as_user: true);
   end
-  if pk > rand(-1000..-500)
+  if pk.to_i > rand(-1000..-500)
     client.chat_postMessage(channel: "$CHANNEL", text: "perl--", as_user: true);
+  else
+    client.chat_postMessage(channel: "$CHANNEL", text: "How much karma does perl have?", as_user: true);
   end
   sleep 1
   # Get messages and parse.
@@ -38,24 +42,35 @@ loop {
     puts "#{ts} #{u}: #{t['text']}"
     # Try and get current karma value.
     if u != "Me"
-      if "#{t['text']}".include? "ruby"
+      if "#{t['text']}".include? "ruby now"
         txt = "#{t['text']}".split(' ')
         rk = txt[4]
       end
-      if "#{t['text']}".include? "poo"
+      if "#{t['text']}".include? "(poo) now"
           txt = "#{t['text']}".split(' ')
           pk = txt[4]
+      end
+      if "#{t['text']}".include? "ruby has"
+        txt = "#{t['text']}".split(' ')
+        rk = txt[3]
+      end
+      if "#{t['text']}".include? "(poo) has"
+          txt = "#{t['text']}".split(' ')
+          pk = txt[3]
       end
     end
   end
   client.im_mark(channel: "$CHANNEL", ts: time)
   time = Time.now.to_i
-  sleep (rand(300..1200))
+  ts = Time.at(time)
+  nap = (rand(300..1200))
+  puts "#{ts} Sleeping for #{nap} seconds."
+  sleep nap
 }
 EOF
 
 chmod +x /usr/src/app/karmabot.tmp
-mv /usr/src/app/karmabot.rb /usr/src/app/karmabot_installer
-mv /usr/src/app/karmabot.tmp /usr/src/app/karmabot.rb
+mv /usr/src/app/karmabot /usr/src/app/karmabot_installer
+mv /usr/src/app/karmabot.tmp /usr/src/app/karmabot
 
-/usr/src/app/karmabot.rb
+/usr/src/app/karmabot
